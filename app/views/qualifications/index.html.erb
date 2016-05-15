@@ -1,0 +1,44 @@
+<div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3>Qualifications</h3></div>
+     <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>View</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @qualifications.each do |qualification| %>
+              <%if qualification['subjects'].present? || qualification['default_products'].present?%>
+              <tr data-toggle="collapse" data-target="#<%=qualification['id']%>" class="accordion-toggle">
+                <td><button class="btn btn-default btn-xs"><span class="fa fa-eye"></span></button></td>
+                <td><%=qualification['name']%></td>
+              </tr><tr>
+              <td colspan="12" ><div class="accordian-body collapse" id=<%=qualification['id']%>>
+              <table class="table table-hover" >
+              <%qualification['subjects'].each do |subject|%>
+                <thead style="background-color:<%=subject['colour']%>"><tr>
+                  <th><%=subject['title']%></th>
+                  <th class="pull-right"><%= link_to 'Show', subject_url(subject['id']) %></th>
+                </tr></thead>
+              <% end %>
+              <%qualification['default_products'].each do |product|%>
+                <thead><tr>
+                  <th><%=product['title']%></th>
+                  <th class="pull-right"><%= link_to 'Show', product_url(product['id']) %></th>
+                </tr></thead>
+              <% end %>
+              </table>
+              </td></tr>
+            <%end%>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
